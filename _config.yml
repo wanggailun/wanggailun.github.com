@@ -2,10 +2,10 @@
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
-# Site
+# 网站配置
 title: Passwhl
 subtitle: '早起的鸟儿有虫吃'
-description: ''
+description:
 keywords:
 author: passwhl
 language: en
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: Hacker
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
