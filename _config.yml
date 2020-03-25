@@ -2,12 +2,12 @@
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
-# 网站配置
-title: Passwhl
-subtitle: '早起的鸟儿有虫吃'
-description:
+# Site
+title: Hexo
+subtitle: ''
+description: ''
 keywords:
-author: passwhl
+author: John Doe
 language: en
 timezone: ''
 
@@ -93,10 +93,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: Hacker
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: 'git'
-  repo: 'git@github.com:passwhl/passwhl.github.io.git'
+  type: ''
