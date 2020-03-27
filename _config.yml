@@ -4,7 +4,6 @@
 
 # Site
 title: 过客
-subtitle: '早期的鸟儿有虫吃!'
 description: ''
 keywords:
 author: passwhl
@@ -103,3 +102,20 @@ deploy:
   type: 'git'
   repo: "git@github.com:passwhl/passwhl.github.io.git"
 
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+  - hexo-generator-feed
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+#本地搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
