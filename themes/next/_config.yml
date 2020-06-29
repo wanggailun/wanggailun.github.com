@@ -1,232 +1,114 @@
-# ===============================================================
-# ========================= ATTENTION! ==========================
-# ===============================================================
-# NexT repository is moving here: https://github.com/theme-next
-# ===============================================================
-# It's rebase to v6.0.0 and future maintenance will resume there
-# ===============================================================
-
-# ---------------------------------------------------------------
-# Theme Core Configuration Settings
-# ---------------------------------------------------------------
-
-# Set to true, if you want to fully override the default configuration.
-# Useful if you don't want to inherit the theme _config.yml configurations.
+#覆盖主题配置
 override: false
 
-# ---------------------------------------------------------------
-# Site Information Settings
-# ---------------------------------------------------------------
-
-# To get or check favicons visit: https://realfavicongenerator.net
-# Put your favicons into `hexo-site/source/` (recommend) or `hexo-site/themes/next/source/images/` directory.
-
-# Default NexT favicons placed in `hexo-site/themes/next/source/images/` directory.
-# And if you want to place your icons in `hexo-site/source/` root directory, you must remove `/images` prefix from pathes.
-
-# For example, you put your favicons into `hexo-site/source/images` directory.
-# Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
+#网站信息
+#图标
 favicon:
   small: /images/favicon-16x16-next.png
   medium: /images/favicon-32x32-next.png
   apple_touch_icon: /images/apple-touch-icon-next.png
   safari_pinned_tab: /images/logo.svg
-  #android_manifest: /images/manifest.json
-  #ms_browserconfig: /images/browserconfig.xml
 
-# Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+#关键字
+keywords: "Blog,"
 
-# Set rss to false to disable feed link.
-# Leave rss as empty to use site's feed link.
-# Set rss to specific value if you have burned your feed already.
+#订阅
 rss: /atom.xml
 
-
+#底部
 footer:
-  # Specify the date when the site was setup.
-  # If not defined, current year will be used.
+  #建站时间
   since: 2015
-
-  # Icon between year and copyright info.
+  #图标
   icon: user
-
-  # If not defined, will be used `author` from Hexo main config.
+  #版权
   copyright:
-  # -------------------------------------------------------------
-  # Hexo link (Powered by Hexo).
+  #底部连接
   powered: false
-
+  #底部连接主题
   theme:
-    # Theme & scheme info link (Theme - NexT.scheme).
     enable: false
-    # Version info of NexT after scheme info (vX.X.X).
     version: false
-  # -------------------------------------------------------------
-  # Any custom text can be defined here.
-  #custom_text: Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a>
 
-# ---------------------------------------------------------------
-# SEO Settings
-# ---------------------------------------------------------------
-
-# Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
-# See: https://support.google.com/webmasters/answer/139066
-# Tips: Before you open this tag, remember set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
+#SEO配置
 canonical: true
+seo: true
+index_with_subtitle: true
 
-# Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
-
-# If true, will add site-subtitle to index page, added in main hexo config.
-# subtitle: Subtitle
-index_with_subtitle: false
-
-
-# ---------------------------------------------------------------
-# Menu Settings
-# ---------------------------------------------------------------
-
-# When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
-# Usage: `Key: /link/ || icon`
-# Key is the name of menu item. If translate for this menu will find in languages - this translate will be loaded; if not - Key name will be used. Key is case-senstive.
-# Value before `||` delimeter is the target link.
-# Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
+#菜单设置
 menu:
-  home: /|| home
-  tags: /tags|| tags
-  categories: /categories|| th
-  archives: /archives|| archive
-  about: /about|| user
-  #schedule: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
-  #commonweal: /404/ || heartbeat
+  home: /||home
+  tags: /tags||tags
+  categories: /categories||th
+  archives: /archives||archive
+  about: /about||user
 
-# Enable/Disable menu icons.
+#菜单图标开关
 menu_icons:
   enable: true
 
-# ---------------------------------------------------------------
-# Scheme Settings
-# ---------------------------------------------------------------
-
-# Schemes
+#主题
 scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-#scheme: Gemini
 
-
-# ---------------------------------------------------------------
-# Sidebar Settings
-# ---------------------------------------------------------------
-
-# Social Links.
-# Usage: `Key: permalink || icon`
-# Key is the link label showing to end users.
-# Value before `||` delimeter is the target permalink.
-# Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
+#侧边设置
+#账号
 social:
   GitHub: https://github.com/passwhl || github
   E-Mail: mailto:passwhl@qq.com || envelope
   Google: https://plus.google.com/passwhl || google
   Twitter: https://twitter.com/passwhl || twitter
   FB Page: https://www.facebook.com/passwhl || facebook
-  #VK Group: https://vk.com/yourname || vk
   StackOverflow: https://stackoverflow.com/passwhl || stack-overflow
   YouTube: https://youtube.com/passwhl || youtube
   Instagram: https://instagram.com/passwhl || instagram
-  #Skype: skype:yourname?call|chat || skype
 
+#账号对应图标
 social_icons:
-  enable: true
+  enable: false
   icons_only: false
   transition: false
 
-# Blog rolls
-links_icon: link
+#链接
+links_icon:
 links_title: 友情链接
-#links_layout: block
 links_layout: inline
 links:
   百度: https://www.baidu.com
   vultr: https://my.vultr.com/
 
-# Sidebar Avatar
-# in theme directory(source/images): /images/avatar.gif
-# in site  directory(source/uploads): /uploads/avatar.gif
-#avatar: /images/avatar.gif
+#侧边头像
+avatar:
 
-# Table Of Contents in the Sidebar
+#侧边中的内容
 toc:
   enable: true
-
-  # Automatically add list number to toc.
   number: true
-
-  # If true, all words will placed on next lines if header width longer then sidebar width.
   wrap: false
 
-# Creative Commons 4.0 International License.
-# http://creativecommons.org/
-# Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-#creative_commons: by-nc-sa
-#creative_commons:
-
+#文章侧边
 sidebar:
-  # Sidebar Position, available value: left | right (only for Pisces | Gemini).
   position: left
-  #position: right
-
-  # Sidebar Display, available value (only for Muse | Mist):
-  #  - post    expand on posts automatically. Default.
-  #  - always  expand for all pages automatically
-  #  - hide    expand only when click on the sidebar toggle icon.
-  #  - remove  Totally remove sidebar including sidebar toggle.
   display: hide
-  #display: always
-  #display: hide
-  #display: remove
-
-  # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
   offset: 12
-
-  # Back to top in sidebar (only for Pisces | Gemini).
   b2t: false
-
-  # Scroll percent label in b2t button.
   scrollpercent: false
-
-  # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
 
-
-# ---------------------------------------------------------------
-# Post Settings
-# ---------------------------------------------------------------
-
-# Automatically scroll page to section which is under <!-- more --> mark.
+#文章设置
 scroll_to_more: true
-
-# Automatically saving scroll position on each post/page in cookies.
 save_scroll: false
-
 # Automatically excerpt description in homepage as preamble text.
 excerpt_description: true
-
-# Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: true
   length: 100
-
 # Post meta display settings
 post_meta:
   item_text: true
   created_at: true
   updated_at: false
   categories: true
-
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
