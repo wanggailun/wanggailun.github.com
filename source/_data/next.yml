@@ -1,0 +1,43 @@
+footer:
+  powered: false
+menu:
+  home: /|| home
+  tags: /tags|| tags
+  categories: /categories|| th
+  archives: /archives|| archive
+  about: /about|| user
+language_switcher: true
+sidebar:
+  display: hide
+social:
+  GitHub: https://github.com/passwhl || github
+  E-Mail: mailto:passwhl@qq.com || envelope
+  Google: https://plus.google.com/passwhl || google
+  Twitter: https://twitter.com/passwhl || twitter
+  FB Page: https://www.facebook.com/passwhl || facebook
+  StackOverflow: https://stackoverflow.com/passwhl || stack-overflow
+  YouTube: https://youtube.com/passwhl || youtube
+  Instagram: https://instagram.com/passwhl || instagram
+links_settings:
+  icon: link
+  title: Link
+  links_layout: inline
+links:
+  baidu: https://www.baidu.com
+  vultr: https://my.vultr.com/
+reward_settings:
+  enable: true
+  animation: false
+reward:
+  wechatpay: /images/wechatpay.jpg
+  alipay: /images/alipay.jpg
+baidu_push: true
+baidu_site_verification:
+baidu_analytics: e8c75b4dc5339adc08fe2f7ad507f862
+livere_uid: MTAyMC80OTMyNi8yNTgxOA==
+busuanzi_count:
+  enable: true
+leancloud_visitors:
+  enable: true
+  app_id: ofcbvgPCrF2bCmDKJi9ytomT-gzGzoHsz
+  app_key: ozyvImRREzURAfOlqLKbRu7l
