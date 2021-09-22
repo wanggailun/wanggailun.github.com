@@ -10,7 +10,7 @@ permalink: :year/:month/:day/:title/
 skip_render: [README.md,CNAME]
 per_page: 10
 theme: next
-deploy.type: 'git'
-deploy.repo: "git@github.com:passwhl/passwhl.github.io.git"
-
-
+deploy:
+  type: git
+  repo: git@github.com:passwhl/passwhl.github.io.git
+  branch: master
