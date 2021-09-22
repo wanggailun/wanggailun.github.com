@@ -11,6 +11,9 @@ skip_render: [README.md,CNAME]
 per_page: 10
 theme: next
 deploy:
-  type: git
+- type: git
   repo: git@github.com:passwhl/passwhl.github.io.git
+  branch: master
+- type: git
+  repo: git@gitee.com:passwhl/passwhl.gitlab.io.git
   branch: master
