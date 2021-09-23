@@ -2,7 +2,7 @@
 title: adb 无线连接教程
 date: 2021-09-22 09:40:00
 categories: 
-- android
+- 记录
 tags:
 - adb
 - 无线

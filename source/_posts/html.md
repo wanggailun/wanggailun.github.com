@@ -1,7 +1,7 @@
 ---
 title: 使用html写文章
 categories:
-  - 教程
+  - 记录
 tags:
   - h5
   - post

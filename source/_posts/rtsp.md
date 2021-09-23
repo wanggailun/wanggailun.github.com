@@ -1,7 +1,7 @@
 ---
 title: h5播放rtsp/rtmp
 categories:
-  - 教程
+  - 记录
 tags:
   - rtsp
   - h5  
