@@ -15,5 +15,5 @@ deploy:
   repo: git@github.com:passwhl/passwhl.github.io.git
   branch: master
 - type: git
-  repo: git@gitee.com:passwhl/passwhl.gitlab.io.git
+  repo: git@gitee.com:passwhl/passwhl.git
   branch: master
