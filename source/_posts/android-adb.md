@@ -10,6 +10,7 @@ tags:
 ---
 adb 无线连接教程
 <!--more-->
+[adb下载](/images/adb.zip)
 *   开启手机无线连接(手机关机需要重新开启) 
 1. 数据线连接设备到电脑2.  执行adb devices 检测设备
 2. 执行adb tcpip 5555  开启设备无线连接
