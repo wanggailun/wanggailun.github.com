@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"b.wguan.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="借助VLC串流，使用h5video播放rtsp&#x2F;rtmp流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5播放rtsp&#x2F;rtmp">
+<meta property="og:url" content="https://b.wguan.top/2021/09/22/h5-rtsp-rtmp/index.html">
+<meta property="og:site_name" content="过客">
+<meta property="og:description" content="借助VLC串流，使用h5video播放rtsp&#x2F;rtmp流">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://b.wguan.top/images/rtsp/rtsp1.png">
+<meta property="og:image" content="https://b.wguan.top/images/rtsp/rtsp2.png">
+<meta property="og:image" content="https://b.wguan.top/images/rtsp/rtsp3.png">
+<meta property="og:image" content="https://b.wguan.top/images/rtsp/rtsp4.png">
+<meta property="og:image" content="https://b.wguan.top/images/rtsp/rtsp5.png">
+<meta property="article:published_time" content="2021-09-22T09:40:00.000Z">
+<meta property="article:modified_time" content="2022-05-11T06:31:32.484Z">
+<meta property="article:author" content="passwhl">
+<meta property="article:tag" content="rtsp">
+<meta property="article:tag" content="h5">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://b.wguan.top/images/rtsp/rtsp1.png">
+
+<link rel="canonical" href="https://b.wguan.top/2021/09/22/h5-rtsp-rtmp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>h5播放rtsp/rtmp | 过客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c4833991a494df5bb3c5937897e44dad";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="过客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">过客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://b.wguan.top/2021/09/22/h5-rtsp-rtmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="passwhl">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="过客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          h5播放rtsp/rtmp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-22 17:40:00" itemprop="dateCreated datePublished" datetime="2021-09-22T17:40:00+08:00">2021-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-11 14:31:32" itemprop="dateModified" datetime="2022-05-11T14:31:32+08:00">2022-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">记录</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/09/22/h5-rtsp-rtmp/" class="post-meta-item leancloud_visitors" data-flag-title="h5播放rtsp/rtmp" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>借助VLC串流，使用h5video播放rtsp&#x2F;rtmp流</p>
+<span id="more"></span>
+<p>p&gt;h5 video标签不支持直接播放rtsp流数据，故需要借助VLC转码处理后使用video标签播放  </p></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.videolan.org/vlc/">下载VLC软件</a></li>
+<li>安装后打开 媒体-&gt;打开网络串流<br><img src="/images/rtsp/rtsp1.png" alt="b.wguan.top"></li>
+<li>输完地址之后在右下角选择串流<br>例如： rtmp://58.200.131.2:1935/livetv/cctv1<br><img src="/images/rtsp/rtsp2.png" alt="b.wguan.top"><br><img src="/images/rtsp/rtsp3.png" alt="b.wguan.top"></li>
+<li>点击底下的下一步-&gt;Http,选中HTTP<br> <img src="/images/rtsp/rtsp4.png" alt="b.wguan.top"></li>
+<li>然后点击右边的添加-&gt;在路径处写上/cctv1,转换出来的视频流地址为如<a target="_blank" rel="noopener" href="http://localhost:8080/cctv1">http://localhost:8080/cctv1</a><br> <img src="/images/rtsp/rtsp5.png" alt="b.wguan.top"></li>
+<li>h5播放<br> <code>&lt;video src=&quot;http://localhost:8080/cctv1&quot; autoplay controls style=&quot;width: 500px;height: 500px;&quot;&gt;&lt;/video&gt;</code></li>
+<li>各摄像头rtsp组成<br>a：英飞拓<br>rtsp://ip:port/1/h264major<br>rtsp://192.168.2.100:554/1/h264major<br>b：大华<br>rtsp://username:password@ip:port/cam/realmonitor?channel=1&amp;subtype=0<br>rtsp://admin123:<a href="mailto:admin123@172.16.0.155">admin123@172.16.0.155</a>:554/cam/realmonitor?channel=1&amp;subtype=1<br>c：海康<br>rtsp://[username]:[password]@[ip]:[port]/[codec]/[channel]/[subtype]/av_stream<br>rtsp://admin:<a href="mailto:hik12345@192.168.8.125">hik12345@192.168.8.125</a>:554/h264/ch33/main/av_stream<br>rtsp://admin:<a href="mailto:hik12345@192.168.8.125">hik12345@192.168.8.125</a>:554/h264/ch33/sub/av_stream<br>rtsp://admin:<a href="mailto:hik12345@192.168.8.125">hik12345@192.168.8.125</a>:554/h264/ch34/main/av_stream  </li>
+<li>在线rtmp资源</li>
+</ol>
+<ul>
+<li>CCTV-1综合:rtmp://58.200.131.2:1935/livetv/cctv1  </li>
+<li>CCTV-2财经:rtmp://58.200.131.2:1935/livetv/cctv2</li>
+<li>CCTV-3综艺:rtmp://58.200.131.2:1935/livetv/cctv3</li>
+<li>CCTV-4中文国际:rtmp://58.200.131.2:1935/livetv/cctv4</li>
+<li>CCTV-5体育:rtmp://58.200.131.2:1935/livetv/cctv5</li>
+<li>CCTV-6电影:rtmp://58.200.131.2:1935/livetv/cctv6</li>
+<li>CCTV-7军事农业:rtmp://58.200.131.2:1935/livetv/cctv7</li>
+<li>CCTV-8电视剧:rtmp://58.200.131.2:1935/livetv/cctv8</li>
+<li>CCTV-9记录:rtmp://58.200.131.2:1935/livetv/cctv9</li>
+<li>CCTV-10科教:rtmp://58.200.131.2:1935/livetv/cctv10</li>
+<li>CCTV-11戏曲:rtmp://58.200.131.2:1935/livetv/cctv11</li>
+<li>CCTV-12社会与法:rtmp://58.200.131.2:1935/livetv/cctv12</li>
+<li>CCTV-13新闻:rtmp://58.200.131.2:1935/livetv/cctv13</li>
+<li>CCTV-14少儿:rtmp://58.200.131.2:1935/livetv/cctv14</li>
+<li>CCTV-15音乐:rtmp://58.200.131.2:1935/livetv/cctv15</li>
+<li>安徽卫视:rtmp://58.200.131.2:1935/livetv/ahtv</li>
+<li>兵团卫视:rtmp://58.200.131.2:1935/livetv/bttv</li>
+<li>重庆卫视:rtmp://58.200.131.2:1935/livetv/cqtv</li>
+<li>东方卫视:rtmp://58.200.131.2:1935/livetv/dftv</li>
+<li>东南卫视:rtmp://58.200.131.2:1935/livetv/dntv</li>
+<li>广东卫视:rtmp://58.200.131.2:1935/livetv/gdtv</li>
+<li>广西卫视:rtmp://58.200.131.2:1935/livetv/gxtv</li>
+<li>甘肃卫视:rtmp://58.200.131.2:1935/livetv/gstv</li>
+<li>贵州卫视:rtmp://58.200.131.2:1935/livetv/gztv</li>
+<li>湖北卫视:rtmp://58.200.131.2:1935/livetv/hbtv</li>
+<li>湖南卫视:rtmp://58.200.131.2:1935/livetv/hunantv</li>
+<li>河北卫视:rtmp://58.200.131.2:1935/livetv/hebtv</li>
+<li>河南卫视:rtmp://58.200.131.2:1935/livetv/hntv</li>
+<li>黑龙江卫视:rtmp://58.200.131.2:1935/livetv/hljtv</li>
+<li>江苏卫视:rtmp://58.200.131.2:1935/livetv/jstv</li>
+<li>江西卫视:rtmp://58.200.131.2:1935/livetv/jxtv</li>
+<li>吉林卫视:rtmp://58.200.131.2:1935/livetv/jltv</li>
+<li>辽宁卫视:rtmp://58.200.131.2:1935/livetv/lntv</li>
+<li>内蒙古卫视:rtmp://58.200.131.2:1935/livetv/nmtv</li>
+<li>宁夏卫视:rtmp://58.200.131.2:1935/livetv/nxtv</li>
+<li>青海卫视:rtmp://58.200.131.2:1935/livetv/qhtv</li>
+<li>四川卫视:rtmp://58.200.131.2:1935/livetv/sctv</li>
+<li>山东卫视:rtmp://58.200.131.2:1935/livetv/sdtv</li>
+<li>山西卫视:rtmp://58.200.131.2:1935/livetv/sxrtv</li>
+<li>陕西卫视:rtmp://58.200.131.2:1935/livetv/sxtv</li>
+<li>山东教育:rtmp://58.200.131.2:1935/livetv/sdetv</li>
+<li>中国教育-1:rtmp://58.200.131.2:1935/livetv/cetv1</li>
+<li>中国教育-3:rtmp://58.200.131.2:1935/livetv/cetv3</li>
+<li>中国教育-4:rtmp://58.200.131.2:1935/livetv/cetv4</li>
+<li>CCTV-第一剧场:rtmp://58.200.131.2:1935/livetv/dyjctv</li>
+<li>CCTV-国防军事:rtmp://58.200.131.2:1935/livetv/gfjstv</li>
+<li>CCTV-怀旧剧场:rtmp://58.200.131.2:1935/livetv/hjjctv</li>
+<li>CCTV-风云剧场:rtmp://58.200.131.2:1935/livetv/fyjctv</li>
+<li>CCTV-风云足球:rtmp://58.200.131.2:1935/livetv/fyzqtv</li>
+<li>CCTV-风云音乐:rtmp://58.200.131.2:1935/livetv/fyyytv</li>
+<li>CCTV-世界地理:rtmp://58.200.131.2:1935/livetv/sjdltv</li>
+<li>CCTV-1HD:rtmp://58.200.131.2:1935/livetv/cctv1hd</li>
+<li>CCTV-2HD:rtmp://58.200.131.2:1935/livetv/cctv2hd</li>
+<li>CCTV-3HD:rtmp://58.200.131.2:1935/livetv/cctv3hd</li>
+<li>CCTV-4HD:rtmp://58.200.131.2:1935/livetv/cctv4hd</li>
+<li>CCTV-5HD:rtmp://58.200.131.2:1935/livetv/cctv5hd</li>
+<li>CCTV5+HD:rtmp://58.200.131.2:1935/livetv/cctv5phd</li>
+<li>CCTV-6HD:rtmp://58.200.131.2:1935/livetv/cctv6hd</li>
+<li>CCTV-7HD:rtmp://58.200.131.2:1935/livetv/cctv7hd</li>
+<li>CCTV-8HD:rtmp://58.200.131.2:1935/livetv/cctv8hd</li>
+<li>CCTV-9HD:rtmp://58.200.131.2:1935/livetv/cctv9hd</li>
+<li>CCTV-10HD:rtmp://58.200.131.2:1935/livetv/cctv10hd</li>
+<li>CCTV-12HD:rtmp://58.200.131.2:1935/livetv/cctv12hd</li>
+<li>CCTV-14HD:rtmp://58.200.131.2:1935/livetv/cctv14hd</li>
+<li>CGTN-新闻:rtmp://58.200.131.2:1935/livetv/cctv16</li>
+<li>CETV-1:rtmp://58.200.131.2:1935/livetv/cetv1</li>
+<li>CETV-3:rtmp://58.200.131.2:1935/livetv/cetv3</li>
+<li>CETV-4:rtmp://58.200.131.2:1935/livetv/cetv4</li>
+<li>北京卫视高清:rtmp://58.200.131.2:1935/livetv/btv1hd</li>
+<li>北京影视高清:rtmp://58.200.131.2:1935/livetv/btv4hd</li>
+<li>北京体育高清:rtmp://58.200.131.2:1935/livetv/btv6hd</li>
+<li>北京新闻高清:rtmp://58.200.131.2:1935/livetv/btv9hd</li>
+<li>北京纪实高清:rtmp://58.200.131.2:1935/livetv/btv11hd</li>
+<li>北京卫视:rtmp://58.200.131.2:1935/livetv/btv1</li>
+<li>北京文艺:rtmp://58.200.131.2:1935/livetv/btv2</li>
+<li>北京科教:rtmp://58.200.131.2:1935/livetv/btv3</li>
+<li>北京影视:rtmp://58.200.131.2:1935/livetv/btv4</li>
+<li>北京财经:rtmp://58.200.131.2:1935/livetv/btv5</li>
+<li>北京体育:rtmp://58.200.131.2:1935/livetv/btv6</li>
+<li>北京生活:rtmp://58.200.131.2:1935/livetv/btv7</li>
+<li>北京青年:rtmp://58.200.131.2:1935/livetv/btv8</li>
+<li>北京新闻:rtmp://58.200.131.2:1935/livetv/btv9</li>
+<li>北京卡酷:rtmp://58.200.131.2:1935/livetv/btv10</li>
+<li>北京文艺高清:rtmp://58.200.131.2:1935/livetv/btv2hd</li>
+<li>安徽卫视高清:rtmp://58.200.131.2:1935/livetv/ahhd</li>
+<li>重庆卫视高清:rtmp://58.200.131.2:1935/livetv/cqhd</li>
+<li>东方卫视高清:rtmp://58.200.131.2:1935/livetv/dfhd</li>
+<li>天津卫视高清:rtmp://58.200.131.2:1935/livetv/tjhd</li>
+<li>东南卫视高清:rtmp://58.200.131.2:1935/livetv/dnhd</li>
+<li>江西卫视高清:rtmp://58.200.131.2:1935/livetv/jxhd</li>
+<li>河北卫视高清:rtmp://58.200.131.2:1935/livetv/hebhd</li>
+<li>湖南卫视高清:rtmp://58.200.131.2:1935/livetv/hunanhd</li>
+<li>湖北卫视高清:rtmp://58.200.131.2:1935/livetv/hbhd</li>
+<li>辽宁卫视高清:rtmp://58.200.131.2:1935/livetv/lnhd</li>
+<li>四川卫视高清:rtmp://58.200.131.2:1935/livetv/schd</li>
+<li>江苏卫视高清:rtmp://58.200.131.2:1935/livetv/jshd</li>
+<li>浙江卫视高清:rtmp://58.200.131.2:1935/livetv/zjhd</li>
+<li>山东卫视高清:rtmp://58.200.131.2:1935/livetv/sdhd</li>
+<li>广东卫视高清:rtmp://58.200.131.2:1935/livetv/gdhd</li>
+<li>深圳卫视高清:rtmp://58.200.131.2:1935/livetv/szhd</li>
+<li>黑龙江卫视高清:rtmp://58.200.131.2:1935/livetv/hljhd</li>
+<li>CHC高清电影:rtmp://58.200.131.2:1935/livetv/chchd</li>
+<li>上海纪实高清:rtmp://58.200.131.2:1935/livetv/docuchina</li>
+<li>金鹰纪实高清:rtmp://58.200.131.2:1935/livetv/gedocu</li>
+<li>全纪实高清:rtmp://58.200.131.2:1935/livetv/documentaryhd</li>
+<li>凤凰卫视中文台:rtmp://58.200.131.2:1935/livetv/fhzw</li>
+<li>凤凰卫视资讯台:rtmp://58.200.131.2:1935/livetv/fhzx</li>
+<li>凤凰卫视电影台:rtmp://58.200.131.2:1935/livetv/fhdy</li>
+<li>星空卫视:rtmp://58.200.131.2:1935/livetv/startv</li>
+<li>Star Sports:rtmp://58.200.131.2:1935/livetv/starsports</li>
+<li>Channel[V]:rtmp://58.200.131.2:1935/livetv/channelv</li>
+<li>探索频道:rtmp://58.200.131.2:1935/livetv/discovery</li>
+<li>国家地理频道:rtmp://58.200.131.2:1935/livetv/natlgeo</li>
+<li>CHC家庭影院:rtmp://58.200.131.2:1935/livetv/chctv</li>
+<li>CHC动作电影:rtmp://58.200.131.2:1935/livetv/chcatv</li>
+<li>美国电视频道:rtmp://media3.scctv.net/live/scctv_800</li>
+<li>香港财经:rtmp://202.69.69.180:443/webcast/bshdlive-pc</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="passwhl 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="passwhl 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/rtsp/" rel="tag"># rtsp</a>
+              <a href="/tags/h5/" rel="tag"># h5</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/22/hexo-html/" rel="prev" title="使用html写文章">
+      <i class="fa fa-chevron-left"></i> 使用html写文章
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/22/code-push/" rel="next" title="code-push">
+      code-push <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80OTMyNi8yNTgxOA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">passwhl</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/passwhl" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:passwhl@qq.com" title="E-Mail → mailto:passwhl@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/passwhl" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/passwhl" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/passwhl" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/passwhl" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/passwhl" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="youtube fa-fw"></i>YouTube</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/passwhl" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;passwhl" rel="noopener" target="_blank"><i class="instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Link
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my.vultr.com/" title="https:&#x2F;&#x2F;my.vultr.com&#x2F;" rel="noopener" target="_blank">vultr</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">passwhl</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ofcbvgPCrF2bCmDKJi9ytomT-gzGzoHsz","app_key":"ozyvImRREzURAfOlqLKbRu7l","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
