@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>APK反编译</title>
+    <url>/2023/02/28/fanbianyi/</url>
+    <content><![CDATA[<p>APK反编译修改后重新打包</p>
+<span id="more"></span>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<a href="/images/fanbianyi.zip">点击下载工具包</a></p>
+<ol>
+<li>本地需要android开发环境</li>
+<li>反解APK到test目录(可直接修改smali目录中的smali代码):<br><code>SET BAT_HOME=%~dp0/tools/apktools &amp;&amp; apktool d test.apk</code>  </li>
+<li>改为zip解压获取dex，并将dex转为jar(阅读逻辑)<br><code>SET BAT_HOME=%~dp0/tools/dex2jar &amp;&amp; d2j-dex2jar.bat classes.dex</code><br><code>SET BAT_HOME=%~dp0/tools/dex2jar &amp;&amp; d2j-dex2jar.bat classes2.dex</code>  </li>
+<li>使用jd-gui.exe阅读jar<br><code>start tools/jd-gui.exe ../classes-dex2jar.jar</code></li>
+<li>改为debug包<br><code>AndroidManifest.xml中的application节点添加android:debuggable=&quot;true&quot;</code></li>
+<li>打包到test1.apk<br><code>SET BAT_HOME=%~dp0/tools/apktools &amp;&amp; apktool b test -o test1.apk</code>  </li>
+<li>签名密码123456<br><code>jarsigner -verbose -keystore ./tools/test.keystore -signedjar test-sign.apk test1.apk test</code></li>
+</ol>
+]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+        <tag>apk</tag>
+        <tag>反编译</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>termux基础</title>
     <url>/2021/11/01/termux/</url>
     <content><![CDATA[<p>废旧手机再利用，使用termux搭建服务器</p>
@@ -66,7 +91,7 @@
 </ol>
 </li>
 <li>发布更新  <ol>
-<li>安装code-push<br>npm install -g <a href="mailto:&#99;&#111;&#x64;&#x65;&#x2d;&#112;&#x75;&#x73;&#x68;&#64;&#x32;&#46;&#x31;&#x2e;&#x39;">&#99;&#111;&#x64;&#x65;&#x2d;&#112;&#x75;&#x73;&#x68;&#64;&#x32;&#46;&#x31;&#x2e;&#x39;</a></li>
+<li>安装code-push<br>npm install -g <a href="mailto:&#x63;&#111;&#x64;&#101;&#45;&#x70;&#x75;&#115;&#x68;&#x40;&#x32;&#46;&#49;&#x2e;&#57;">&#x63;&#111;&#x64;&#101;&#45;&#x70;&#x75;&#115;&#x68;&#x40;&#x32;&#46;&#49;&#x2e;&#57;</a></li>
 <li>登录<br>命令行执行: code-push login 服务器地址(<a href="http://localhost:3000/">http://localhost:3000</a>)<br>会自动打开浏览器登录完有个token，复制填入命令行继续</li>
 <li>查看app列表<br>code-push apps list<br>code-push app add test android cordova<br>code-push deployment list test -k<br>code-push deployment add dev</li>
 <li>在项目根目录执行发布<br>先ionic cordova build android&#x2F;ios –prod<br>build后平台下边就会有各自的资源文件<br>code-push release test .&#x2F;platforms&#x2F;android&#x2F;app&#x2F;src&#x2F;main&#x2F;assets&#x2F;www 1.0.0 -d dev</li>
@@ -304,7 +329,7 @@
 <h3 id="2-段落"><a href="#2-段落" class="headerlink" title="2. 段落"></a>2. 段落</h3><p><code>段落的换行是使用两个以上空格加上回车</code></p>
 <h3 id="3-列表"><a href="#3-列表" class="headerlink" title="3. 列表"></a>3. 列表</h3><h5 id="3-1-无序列表"><a href="#3-1-无序列表" class="headerlink" title="3.1. 无序列表"></a>3.1. 无序列表</h5><p><code>无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记</code></p>
 <h5 id="3-2-有序列表"><a href="#3-2-有序列表" class="headerlink" title="3.2. 有序列表"></a>3.2. 有序列表</h5><p><code>有序列表使用数字并加上 . 号来表示</code></p>
-<h3 id="4-区块"><a href="#4-区块" class="headerlink" title="4. 区块"></a>4. 区块</h3><p><code>使用&amp;gt;号表示区块,一个 &amp;gt; 符号是最外层，两个 &amp;gt; 符号是第一层嵌套</code></p>
+<h3 id="4-区块"><a href="#4-区块" class="headerlink" title="4. 区块"></a>4. 区块</h3><p><code>使用&gt;号表示区块,一个 &gt; 符号是最外层，两个 &gt; 符号是第一层嵌套</code></p>
 <h3 id="5-代码"><a href="#5-代码" class="headerlink" title="5. 代码"></a>5. 代码</h3><p><code>代码区块使用 4 个空格或者一个制表符（Tab 键）。</code></p>
 <h3 id="6-链接"><a href="#6-链接" class="headerlink" title="6. 链接"></a>6. 链接</h3><p><code>[链接名称](链接地址)</code> 或者 <code>&amp;lt;链接地址&amp;gt;</code></p>
 <h3 id="7-图片"><a href="#7-图片" class="headerlink" title="7. 图片"></a>7. 图片</h3><p><code>![alt 属性文本](图片地址)</code> 或者<code>![alt 属性文本](图片地址 &amp;quot;标题&amp;quot;)</code></p>
